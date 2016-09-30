@@ -12,8 +12,7 @@ class token():
 #need to add all the keywords these are some
 class tmlexer():
     def __init__(self):
-	self.keywords =
-['while','read','return','if','endif','else','int']
+	self.keywords = ['while','read','return','if','endif','else','int']
 	self.separators = ['(',')',';']
 	self.operators = ['<','*','+','-',':=']
 	self.source_file = None
@@ -25,22 +24,17 @@ class tmlexer():
 
 
 
-# build a function that determines that string is a valid token
-	#pre condition: has a valid string given as argument
-	#post condition: returns token type for string argument
 
 
-# int_fsm()
+    def fsmforreals(self, string):
 	#pre: valid string given as the argument
 	#post: will return true if accepted, else False
-        table = [[1,3,3],[1,2,3],[1,2,3],[3,3,3]]
-        accepted_state = 1
+        table = [[1,4,4],[1,2,4],[3,4,4],[3,4,4],[4,4,4]]
+        accepted_state = 3
         state = 0
         for i in range(len(string)):
-            if string[i].isalpha():
+         if string[i].isdigit():
                 sigma=0
-            elif string[i].isdigit():
-                sigma=1
             else:
                 sigma=2
             state = table[state][sigma]
@@ -57,3 +51,16 @@ class tmlexer():
 # identifier_fsm()
 	#pre: same as above
 	#post: return true if accepted, ....
+
+
+
+# build a function that determines that string is a valid token
+	#pre condition: has a valid string given as argument
+	#post condition: returns token type for string argument
+	if self.int
+
+
+
+
+
+
