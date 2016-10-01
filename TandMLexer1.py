@@ -14,7 +14,7 @@ class tmlexer():
     def __init__(self):
         self.keywords = ['while','read','return','if','endif','else','integer','boolean','real']
         self.separators = ['(',')',';','{','}',',','$$']
-        self.operators = ['<','*','+','-',':=']
+        self.operators = ['<','*','+','-',':=','/','>','>=','<=','=']
         self.source_file = None
 
 
