@@ -1,7 +1,7 @@
 import sys
 #we are importing sys so we can run our program with arguements
 
-class token():
+class Token():
     def __init__(self, token, lexeme):
 	self.token = token
 	self.lexeme = lexeme
@@ -30,12 +30,38 @@ class tmlexer():
 		for token in string.split():
 		    yield self.isit_token(token)
 
-def add_white(self, string):
-    for op in single_ops + self.SEPERATORS:
-	string = string.replace(" =  = ", " == ")
-	string = string.replace(" !  + ", " != ")
-	return string
+    def add_white(self, string):
+        for op in single_ops + self.SEPERATORS:
+	    string = string.replace(" =  = ", " == ")
+	    string = string.replace(" !  + ", " != ")
+	    return string
 
+    def is_it_token(self, string)
+	if string in self.operators:
+	    token = Token('Operator', string)
+	elif string in self.seperators:
+	    token = Token('Separator', string)
+	elif string in self.keywords:
+	    token = Token('Keyword', string)
+	else:
+	    token = self.token_fsm(string)
+	return token
+
+
+    def token_machine(self, string):
+	if self.int_fsm(string):
+	   token = Token('Int', string)
+	elif self,fsmforreals(string):
+	   token = Token('Real', string)
+	elif self.identifier_fsm(string):
+	   token = Token('Identifier', string)
+	else:
+	   token = Token('Unknown', string)
+	return token
+
+
+   def ident_fsm(self, string):
+	table = 
 
 
     def fsmforreals(self, string):
@@ -56,13 +82,6 @@ def add_white(self, string):
             accepted = False
         return accepted
 
-# real_fsm()
-	#pre: Valid string given as arg
-	#post: return t if accepted, false otherwise
-
-# identifier_fsm()
-	#pre: same as above
-	#post: return true if accepted, ....
 
 
 
