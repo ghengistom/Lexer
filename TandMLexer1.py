@@ -13,7 +13,7 @@ class Token():
 class tmlexer():
     def __init__(self):
 	self.keywords = ['while','read','return','if','endif','else','integer','boolean','real']
-	self.separators = ['(',')',';']
+	self.separators = ['(',')',';','{','}',',','$$']
 	self.operators = ['<','*','+','-',':=']
 	self.source_file = None
 
@@ -26,12 +26,14 @@ class tmlexer():
     def retrieve_tokens(self):
 	with open(self.source_file, 'r+') as source:
 	    for line in source:
-		string =self.add_white(line)
+		string = self.add_white(line)
 		for token in string.split():
-		    yield self.isit_token(token)
+		    yield self.is_it_token(token)
 
     def add_white(self, string):
         for op in single_ops + self.SEPERATORS:
+#	    fill in with whitespace
+	        string = string.replace(op, " {} ".format(op))
 	    string = string.replace(" =  = ", " == ")
 	    string = string.replace(" !  + ", " != ")
 	    return string
@@ -51,7 +53,7 @@ class tmlexer():
     def token_machine(self, string):
 	if self.int_fsm(string):
 	   token = Token('Int', string)
-	elif self,fsmforreals(string):
+	elif self,fsm_for_reals(string):
 	   token = Token('Real', string)
 	elif self.identifier_fsm(string):
 	   token = Token('Identifier', string)
@@ -60,11 +62,7 @@ class tmlexer():
 	return token
 
 
-   def ident_fsm(self, string):
-	table = 
-
-
-    def fsmforreals(self, string):
+   def fsm_for_reals(self, string):
 	#pre: valid string given as the argument
 	#post: will return true if accepted, else False
         table = [[1,4,4],[1,2,4],[3,4,4],[3,4,4],[4,4,4]]
@@ -83,12 +81,49 @@ class tmlexer():
         return accepted
 
 
+   def ident_fsm(self, string):
+	table = [[1,3,3],[1,2,3],[1,2,3],[3,3,3]]
+	accepted_state = 1
+	state = 0
+	for i in range(len(string)):
+	    if string[i].isalpha():
+		sigma=0
+	    elif string[i].isdigit():
+	        sigma=1
+	    else:
+		sigma=2
+	    state = table[state][sigma]
+	if state == accepted_state:
+	    accepted = True
+	else:
+	    accepted = False
+	return accepted
+
+    def int_fsm(self, string):
+	table = [[0,1],[1,1]]
+	accepted_state = 0
+	state = 0
+	for i in range(len(string)):
+	   if string[i].isdigit():
+		sigma=0
+	   else:
+		sigma=1
+	   state = table[state][sigma]
+	if state == accepted_state:
+	    accepted = True
+	else:
+	    accepted = False
+	return accepted
 
 
-# build a function that determines that string is a valid token
-	#pre condition: has a valid string given as argument
-	#post condition: returns token type for string argument
-	if self.int
+if __name__=='__main__':
+    lex = Lexer()
+    lex.set_source_file(sys.argv[1])
+    token_count = 0
+    for token in lex.get_tokens():
+	print(token)
+	token_count += 1
+    print("{} amount of tokens in file.".format(token_count))
 
 
 
