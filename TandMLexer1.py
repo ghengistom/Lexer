@@ -12,17 +12,29 @@ class token():
 #need to add all the keywords these are some
 class tmlexer():
     def __init__(self):
-	self.keywords = ['while','read','return','if','endif','else','int']
+	self.keywords = ['while','read','return','if','endif','else','integer','boolean','real']
 	self.separators = ['(',')',';']
 	self.operators = ['<','*','+','-',':=']
 	self.source_file = None
 
 
+    def setfile(self, filename):
+	self.source_file = filename
 
 # implement a way to get a text file in here
 # retrieve_tokens() this will iterate through the strings of text
+    def retrieve_tokens(self):
+	with open(self.source_file, 'r+') as source:
+	    for line in source:
+		string =self.add_white(line)
+		for token in string.split():
+		    yield self.isit_token(token)
 
-
+def add_white(self, string):
+    for op in single_ops + self.SEPERATORS:
+	string = string.replace(" =  = ", " == ")
+	string = string.replace(" !  + ", " != ")
+	return string
 
 
 
