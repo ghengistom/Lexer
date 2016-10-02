@@ -66,13 +66,13 @@ class tmlexer():
     def fsm_for_reals(self, string):
 	#pre: valid string given as the argument
 	#post: will return true if accepted, else False
-        table = [[1,4,4],[1,2,4],[3,4,4],[3,4,4],[4,4,4]]
-        accepted_state = 3
+        table = [[0,1,3],[2,3,3],[2,3,3],[3,3,3]]
+        accepted_state = 2
         state = 0
         for i in range(len(string)):
             if string[i].isdigit():
                 sigma=0
-            elif string[i] == ',':
+            elif string[i] == '.':
                 sigma=1
             else:
                 sigma=2
