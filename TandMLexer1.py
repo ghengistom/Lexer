@@ -17,10 +17,6 @@ class tmlexer():
         self.operators = ['<','*','+','-',':=','/','>','>=','<=','=']
         self.source_file = None
 
-
-    def setfile(self, filename):
-        self.source_file = filename
-
 # implement a way to get a text file in here
 # retrieve_tokens() this will iterate through the strings of text
     def retrieve_tokens(self):
@@ -30,6 +26,7 @@ class tmlexer():
                 for token in string.split():
                     yield self.is_it_token(token)
 
+# adds whitespace required to separate otherwise adjaced identifiers, keywords, reals, and ints
     def add_white(self, string):
         single_ops = ['+','-','*','/','!','=','>','<']
         for op in single_ops + self.separators:
@@ -39,6 +36,7 @@ class tmlexer():
         string = string.replace(" !  + ", " != ")
         return string
 
+# classifies things into categories of operators, seps, keywords, ints, reals, ident, unknown
     def is_it_token(self, string):
         if string in self.operators:
             token = Token('Operator', string)
@@ -50,7 +48,7 @@ class tmlexer():
             token = self.token_machine(string)
         return token
 
-
+# if it's not a operator, separator, keyword, then it is either a: int,real, ident, or unknown
     def token_machine(self, string):
         if self.int_fsm(string):
             token = Token('Int', string)
@@ -62,7 +60,8 @@ class tmlexer():
             token = Token('Unknown', string)
         return token
 
-
+# this is the finite state machine to determine if something is a real numbers
+# the accepted state is state 2, the burn state is state 3
     def fsm_for_reals(self, string):
 	#pre: valid string given as the argument
 	#post: will return true if accepted, else False
@@ -83,7 +82,8 @@ class tmlexer():
             accepted = False
         return accepted
 
-
+# this is the finite state machine to determine if something is an identifier
+# state 2 is the accepted state, state 3 is the burn state
     def ident_fsm(self, string):
         table = [[1,3,3,3],[2,2,2,3],[2,2,3,3],[3,3,3,3]]
         accepted_state = 2
@@ -104,6 +104,8 @@ class tmlexer():
             accepted = False
         return accepted
 
+# this is the finite state machine to determine if something is an integer
+# state 0 is the accepted state, state 1 is the burn state
     def int_fsm(self, string):
         table = [[0,1],[1,1]]
         accepted_state = 0
@@ -120,6 +122,8 @@ class tmlexer():
             accepted = False
         return accepted
 
+    def setfile(self, filename):
+        self.source_file = filename
 
 if __name__=='__main__':
     lex = tmlexer()
