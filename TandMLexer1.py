@@ -85,16 +85,18 @@ class tmlexer():
 
 
     def ident_fsm(self, string):
-        table = [[1,3,3],[1,2,3],[1,2,3],[3,3,3]]
-        accepted_state = 1
+        table = [[1,3,3,3],[2,2,2,3],[2,2,3,3],[3,3,3,3]]
+        accepted_state = 2
         state = 0
         for i in range(len(string)):
             if string[i].isalpha():
                 sigma=0
             elif string[i].isdigit():
                 sigma=1
-            else:
+            elif string[i] == '_':
                 sigma=2
+            else:
+                sigma=3
             state = table[state][sigma]
         if state == accepted_state:
             accepted = True
