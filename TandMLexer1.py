@@ -70,7 +70,7 @@ class tmlexer():
         state = 0
         for i in range(len(string)):
             if string[i].isdigit():
-                inputs=0
+                input=0
             elif string[i] == '.':
                 input=1
             else:
