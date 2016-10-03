@@ -8,7 +8,7 @@ class Token():
         self.token = token
         
     def __str__(self):
-        return "<token:{}, lexeme:'{}'>".format(self.token, self.lexeme)
+        return "<token:{},                lexeme:'{}'>".format(self.token, self.lexeme)
 
 #need to add all the keywords these are some
 class tmlexer():
