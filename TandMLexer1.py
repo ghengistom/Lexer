@@ -15,7 +15,7 @@ class tmlexer():
     def __init__(self):
         self.keywords = ['while','read','return','if','endif','else','integer','boolean','real']
         self.separators = ['(',')',';','{','}',',','$$','[',']',':']
-        self.operators = ['<','*','+','-',':=','/','>','>=','<=','=']
+        self.operators = ['<','*','+','-',':=','/','>','=']
         self.source_file = None
 
 # implement a way to get a text file in here
@@ -129,6 +129,7 @@ class tmlexer():
     def setfile(self, filename):
         self.source_file = filename
 
+# count the tokens 
 if __name__=='__main__':
     lex = tmlexer()
     lex.setfile(sys.argv[1])
