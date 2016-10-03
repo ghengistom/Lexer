@@ -4,9 +4,9 @@ import sys
 
 class Token():
     def __init__(self, token, lexeme):
-        self.token = token
         self.lexeme = lexeme
-
+        self.token = token
+        
     def __str__(self):
         return "<token:{}, lexeme:'{}'>".format(self.token, self.lexeme)
 
@@ -74,12 +74,12 @@ class tmlexer():
         state = 0
         for i in range(len(string)):
             if string[i].isdigit():
-                sigma=0
+                inputs=0
             elif string[i] == '.':
-                sigma=1
+                input=1
             else:
-                sigma=2
-            state = table[state][sigma]
+                input=2
+            state = table[state][input]
         if state == accepted_state:
             accepted = True
         else:
@@ -94,14 +94,14 @@ class tmlexer():
         state = 0
         for i in range(len(string)):
             if string[i].isalpha():
-                sigma=0
+                input=0
             elif string[i].isdigit():
-                sigma=1
+                input=1
             elif string[i] == '_':
-                sigma=2
+                input=2
             else:
-                sigma=3
-            state = table[state][sigma]
+                input=3
+            state = table[state][input]
         if state == accepted_state:
             accepted = True
         else:
@@ -116,10 +116,10 @@ class tmlexer():
         state = 0
         for i in range(len(string)):
             if string[i].isdigit():
-                sigma=0
+                input=0
             else:
-                sigma=1
-            state = table[state][sigma]
+                input=1
+            state = table[state][input]
         if state == accepted_state:
             accepted = True
         else:
