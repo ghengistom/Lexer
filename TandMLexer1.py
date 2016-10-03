@@ -60,6 +60,9 @@ class tmlexer():
             token = Token('Unknown', string)
         return token
 
+# 		3 finite state machines implemented to determine int, reals, and idents
+
+
 # this is the finite state machine to determine if something is a real numbers
 # the accepted state is state 2, the burn state is state 3
     def fsm_for_reals(self, string):
