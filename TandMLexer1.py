@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import sys
 #we are importing sys so we can run our program with arguements
 
